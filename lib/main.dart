@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// ----------------- City Graph Painter -----------------
 class CityGraph extends StatelessWidget {
   final List<List<double>> coordinates;
   final List<List<int>> tspPath;
@@ -67,14 +66,12 @@ class _CityGraphPainter extends CustomPainter {
       return Offset(x, size.height - y);
     }).toList();
 
-    // Draw all pairwise connections as light background
     for (int i = 0; i < points.length; i++) {
       for (int j = i + 1; j < points.length; j++) {
         canvas.drawLine(points[i], points[j], paintLine);
       }
     }
 
-    // Draw user-defined connections in green
     for (var conn in connections) {
       if (conn[0] < points.length && conn[1] < points.length) {
         canvas.drawLine(points[conn[0]], points[conn[1]], paintConnection);
@@ -108,14 +105,14 @@ class _CityGraphPainter extends CustomPainter {
       }
     }
 
-    // Draw TSP path
+    
     for (var conn in tspPath) {
       if (conn[0] < points.length && conn[1] < points.length) {
         canvas.drawLine(points[conn[0]], points[conn[1]], paintTSP);
       }
     }
 
-    // Draw cities with shadow
+  
     for (int i = 0; i < points.length; i++) {
       // Shadow
       canvas.drawCircle(
@@ -123,9 +120,9 @@ class _CityGraphPainter extends CustomPainter {
         6,
         Paint()..color = Colors.black.withOpacity(0.3),
       );
-      // City
+      
       canvas.drawCircle(points[i], 6, paintCity);
-      // Border
+      
       canvas.drawCircle(
         points[i],
         6,
@@ -135,7 +132,7 @@ class _CityGraphPainter extends CustomPainter {
           ..strokeWidth = 2,
       );
 
-      // Label
+     
       final textSpan = TextSpan(
         text: '$i',
         style: const TextStyle(
@@ -158,7 +155,7 @@ class _CityGraphPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-// ----------------- Flutter App -----------------
+
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -508,7 +505,7 @@ class _TSPAppState extends State<TSPApp> {
                         ),
                         const SizedBox(height: 24),
 
-                        // Connections section
+                  
                         const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -639,7 +636,7 @@ class _TSPAppState extends State<TSPApp> {
                         ),
                         const SizedBox(height: 24),
 
-                        // Calculate button
+                       
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton.icon(
@@ -679,7 +676,7 @@ class _TSPAppState extends State<TSPApp> {
                 ),
                 const SizedBox(height: 20),
 
-                // Error message
+                
                 if (message != null)
                   Container(
                     width: double.infinity,
@@ -706,7 +703,7 @@ class _TSPAppState extends State<TSPApp> {
                     ),
                   ),
 
-                // Results section
+                
                 if (coords != null && tspPath != null) ...[
                   const SizedBox(height: 20),
                   Card(
@@ -745,7 +742,7 @@ class _TSPAppState extends State<TSPApp> {
                           ),
                           const SizedBox(height: 24),
 
-                          // Cost and Path
+                          
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
@@ -824,7 +821,7 @@ class _TSPAppState extends State<TSPApp> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Distance breakdown
+                          
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
@@ -936,7 +933,7 @@ class _TSPAppState extends State<TSPApp> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Legend
+                          
                           Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
